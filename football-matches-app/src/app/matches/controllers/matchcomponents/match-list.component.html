@@ -1,0 +1,75 @@
+<mat-card>
+  <mat-card-header>
+
+    <mat-card-title>Match List</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <!-- Match Day Selection -->
+    <mat-form-field appearance="fill" class="match-day-selection">
+      <mat-label>Select Match Day</mat-label>
+      <mat-select [(ngModel)]="selectedMatchDay" (selectionChange)="onMatchDaySelected()">
+        <mat-option *ngFor="let day of matchDays" [value]="day">
+          Match Day {{ day }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <!-- Filter -->
+    <mat-form-field appearance="fill" class="filter">
+      <mat-label>Filter by team or stadium</mat-label>
+      <input matInput [(ngModel)]="filterText" (input)="applyFilter()">
+    </mat-form-field>
+
+    <!-- Matches Display -->
+    <div *ngIf="dataSource && dataSource.data.length > 0; else noMatches">
+      <h2>Matches for Match Day {{ selectedMatchDay }}</h2>
+      <table mat-table [dataSource]="dataSource" matSort class="matches-table mat-elevation-z8">
+
+        <!-- Match ID Column -->
+        <ng-container matColumnDef="matchId">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="handleSort('matchId')">Match ID</th>
+          <td mat-cell *matCellDef="let match">{{ match.matchId }}</td>
+        </ng-container>
+
+        <!-- Home Team Column -->
+        <ng-container matColumnDef="homeTeam">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="handleSort('homeTeam.teamName')">Home Team</th>
+          <td mat-cell *matCellDef="let match">{{ match.homeTeam.teamName }}</td>
+        </ng-container>
+
+        <!-- Away Team Column -->
+        <ng-container matColumnDef="awayTeam">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="handleSort('awayTeam.teamName')">Away Team</th>
+          <td mat-cell *matCellDef="let match">{{ match.awayTeam.teamName }}</td>
+        </ng-container>
+
+        <!-- Kickoff Time Column -->
+        <ng-container matColumnDef="kickoffTime">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="handleSort('kickoffTime')">Kickoff Time</th>
+          <td mat-cell *matCellDef="let match">{{ match.kickoffTime | date: 'short' }}</td>
+        </ng-container>
+
+        <!-- Stadium Column -->
+        <ng-container matColumnDef="stadium">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header (click)="handleSort('stadium.stadiumName')">Stadium</th>
+          <td mat-cell *matCellDef="let match">{{ match.stadium.stadiumName }}</td>
+        </ng-container>
+
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      </table>
+
+      <!-- Pagination -->
+      <mat-paginator [length]="dataSource.data.length"
+                     [pageSize]="pageSize"
+                     [pageSizeOptions]="[5, 10, 20]"
+                     (page)="changePage($event)">
+      </mat-paginator>
+    </div>
+
+    <!-- No Matches Placeholder -->
+    <ng-template #noMatches>
+      <p>No matches available for the selected match day.</p>
+    </ng-template>
+  </mat-card-content>
+</mat-card>
