@@ -1,0 +1,51 @@
+# Ignore build artifacts
+bin/
+obj/
+*.dll
+*.exe
+*.pdb
+*.log
+*.cache
+
+# Ignore Visual Studio and Rider settings
+.vs/
+.idea/
+*.user
+*.suo
+*.csproj.user
+
+# Ignore environment and secrets
+.env
+FootballMatches/FootballMatches.API/.env
+FootballMatches/.env
+
+# Ignore compiled files
+FootballMatches/FootballMatches.API/bin/
+FootballMatches/FootballMatches.API/obj/
+FootballMatches/FootballMatches.Tests/bin/
+FootballMatches/FootballMatches.Tests/obj/
+
+# Ignore migrations generated files (optional, keep if needed)
+FootballMatches/FootballMatches.API/Migrations/
+
+# Ignore package manager lock files (optional)
+football-matches-app/package-lock.json
+
+# Ignore temporary and system files
+Thumbs.db
+.DS_Store
+*.swp
+*.swo
+
+# Ignore logs
+logs/
+*.log
+npm-debug.log*
+
+# Ignore Docker artifacts
+docker-compose.dcproj
+Dockerfile
+.dockerignore
+
+# Ignore Jenkins CI/CD pipeline file
+Jenkinsfile

@@ -1,16 +1,18 @@
 using Microsoft.AspNetCore.Mvc;
 using FootballMatches.API.Interfaces;
 using FootballMatches.API.DTOs;
+using Microsoft.AspNetCore.Authorization;
 
 namespace FootballMatches.API.Controllers
 {
+    //[Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class MatchesController : ControllerBase
     {
         private readonly IMatchService _matchService;        
 
-        public MatchesController(IMatchService matchService, IXmlParserService xmlParserService)
+        public MatchesController(IMatchService matchService)
         {
             _matchService = matchService;
             

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-
-namespace FootballMatches.API.Models
+﻿namespace FootballMatches.API.Models
 {
     public class Competition
     {
